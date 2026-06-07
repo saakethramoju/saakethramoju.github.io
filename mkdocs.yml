@@ -1,0 +1,5 @@
+site_name: Saaketh Ramoju
+site_url: https://saakethramoju.github.io
+
+theme:
+  name: material
