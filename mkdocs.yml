@@ -14,6 +14,7 @@ theme:
 
 extra_css:
   - stylesheets/y2k-nasa.css
+  - stylesheets/fullflow.css
 
 markdown_extensions:
   - admonition
@@ -26,6 +27,10 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
+plugins:
+  - search
+  - macros
+
 nav:
   - Home: index.md
 
@@ -36,11 +41,18 @@ nav:
 
       - FullFlow:
           - Overview: softwares/fullflow/index.md
+          - Introduction: softwares/fullflow/introduction.md
           - Installation: softwares/fullflow/installation.md
-          - Quick Start: softwares/fullflow/short-example.md
+          - Introductory Example: softwares/fullflow/introductory-example.md
+          - Steady-State Examples: softwares/fullflow/steady-state-examples.md
+          - Transient Examples: softwares/fullflow/transient-examples.md
           - States: softwares/fullflow/states.md
           - Components:
               - Overview: softwares/fullflow/components/index.md
+              - Custom Components: softwares/fullflow/components/custom-components.md
+              - Nodes:
+                  - Overview: softwares/fullflow/components/nodes/index.md
+                  - Boundary: softwares/fullflow/components/nodes/boundary.md
           - Networks: softwares/fullflow/networks.md
           - Balances: softwares/fullflow/balances.md
 

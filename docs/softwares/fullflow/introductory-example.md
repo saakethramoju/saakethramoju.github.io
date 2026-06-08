@@ -1,4 +1,4 @@
-# Quick Start
+# Introductory Example
 
 The following is meant to be a quick example to get you familiar with FullFlow's interface. Before moving forward, make sure that you have successfully installed  `fullflow` into your Python environment. More installation instructions can be found [here](installation.md).
 

@@ -1,0 +1,114 @@
+/* =========================
+   FullFlow API Documentation
+   ========================= */
+
+.ff-api {
+  margin-top: 1.5rem;
+}
+
+.ff-object-path {
+  display: inline-block;
+  margin: 0.5rem 0 2rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(127, 216, 255, 0.7);
+  background: rgba(8, 33, 63, 0.95);
+  color: var(--cream);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.ff-section {
+  margin-top: 2.25rem;
+}
+
+.ff-section h2 {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--red);
+  color: var(--blue);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+}
+
+.ff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 2rem;
+  border-top: 1px solid rgba(7, 21, 38, 0.22);
+  border-bottom: 1px solid rgba(7, 21, 38, 0.22);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.ff-table th {
+  padding: 0.65rem 0.7rem;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.85);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ff-table td {
+  padding: 0.75rem 0.7rem;
+  border-bottom: 1px solid rgba(7, 21, 38, 0.13);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  vertical-align: top;
+}
+
+.ff-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ff-table .ff-name {
+  width: 20%;
+}
+
+.ff-table .ff-type {
+  width: 22%;
+}
+
+.ff-table .ff-desc {
+  width: 58%;
+}
+
+.ff-table code {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.ff-desc p {
+  margin: 0 0 0.55rem;
+}
+
+.ff-desc p:last-child {
+  margin-bottom: 0;
+}
+
+.ff-equation {
+  margin: 0.55rem 0 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid var(--blue);
+  background: rgba(8, 33, 63, 0.07);
+  color: var(--navy);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  overflow-x: auto;
+}
+
+.ff-equation code {
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
