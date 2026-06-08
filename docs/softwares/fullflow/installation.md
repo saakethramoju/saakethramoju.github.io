@@ -10,6 +10,14 @@ Install the latest release with:
 pip install fullflow
 ```
 
+or 
+
+```bash
+pip3 install fullflow
+```
+
+depending on your version of python.
+
 ## Upgrade FullFlow
 
 To upgrade an existing installation:
