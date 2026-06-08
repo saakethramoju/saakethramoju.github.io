@@ -12,11 +12,11 @@ Documentation for my Python tools:
 - [FullFlow](softwares/fullflow/index.md)
 - [Nozzle Contour Generator](softwares/nozzle-contour-generator/index.md)
 
-## Engineering Notes
+## Notes
 
 Notes on various math, physics, and engineering topics
 
-[Engineering Notes](engineering-notes/index.md)
+[Engineering Notes](notes/index.md)
 
 ## Projects
 

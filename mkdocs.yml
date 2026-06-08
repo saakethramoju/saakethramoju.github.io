@@ -46,8 +46,8 @@ nav:
 
       - Nozzle Contour Generator: softwares/nozzle-contour-generator/index.md
 
-  - Engineering Notes:
-      - Overview: engineering-notes/index.md
+  - Notes:
+      - Overview: notes/index.md
 
   - Projects:
       - Overview: projects/index.md
