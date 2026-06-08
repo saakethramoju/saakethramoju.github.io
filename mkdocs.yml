@@ -69,6 +69,28 @@ nav:
                   - Junctions:
                       - Flow Splitter: softwares/fullflow/components/nodes/junctions/flow-splitter.md
                       - Flow Mixer: softwares/fullflow/components/nodes/junctions/flow-mixer.md
+              - Branches:
+                  - Discharge Coefficient:
+                      - Discharge Coefficient: softwares/fullflow/components/branches/discharge-coefficient/discharge-coefficient.md
+                      - Series CdA: softwares/fullflow/components/branches/discharge-coefficient/series-cda.md
+                      - Parallel CdA: softwares/fullflow/components/branches/discharge-coefficient/parallel-cda.md
+                      - Cavitating Venturi: softwares/fullflow/components/branches/discharge-coefficient/cavitating-venturi.md
+                  - Compressible Flow:
+                      - Isentropic Compressible Orifice: softwares/fullflow/components/branches/compressible-flow/isentropic-compressible-orifice.md
+                      - Isentropic Area Change: softwares/fullflow/components/branches/compressible-flow/isentropic-area-change.md
+                      - Compressible Flow Tube: softwares/fullflow/components/branches/compressible-flow/compressible-flow-tube.md
+                      - Choked Fanno Flow: softwares/fullflow/components/branches/compressible-flow/choked-fanno-flow.md
+                      - Choked Rayleigh Flow: softwares/fullflow/components/branches/compressible-flow/choked-rayleigh-flow.md
+                      - Stationary Normal Shock: softwares/fullflow/components/branches/compressible-flow/stationary-normal-shock.md
+                  - Convection Coefficients:
+                      - Gnielinski: softwares/fullflow/components/branches/convection-coefficients/gnielinski.md
+                      - Miropolskii: softwares/fullflow/components/branches/convection-coefficients/miropolskii.md
+                      - Petukhov: softwares/fullflow/components/branches/convection-coefficients/petukhov.md
+                      - Dittus-Boelter: softwares/fullflow/components/branches/convection-coefficients/dittus-boelter.md
+                      - Sieder-Tate: softwares/fullflow/components/branches/convection-coefficients/sieder-tate.md
+                      - Bartz: softwares/fullflow/components/branches/convection-coefficients/bartz.md
+                      - Natural Convection: softwares/fullflow/components/branches/convection-coefficients/natural-convection.md
+                      - Churchill-Chu: softwares/fullflow/components/branches/convection-coefficients/churchill-chu.md
           - Networks: softwares/fullflow/networks.md
           - Balances: softwares/fullflow/balances.md
           - Compositions: softwares/fullflow/compositions.md

@@ -1,3 +1,5 @@
+import numpy as np
+
 class Component:
     pass
 
@@ -10,6 +12,73 @@ class State:
     pass
 
 class Composition: pass
+
+
+class DischargeCoefficient(Component):
+    """
+    Incompressible restriction flow model using a discharge coefficient.
+
+    `DischargeCoefficient` computes mass flow through a restriction from the
+    pressure difference, fluid density, discharge coefficient, and flow area. The
+    sign of the mass flow follows the sign of the pressure difference, allowing
+    reverse flow when downstream pressure exceeds upstream pressure.
+
+    Relations
+    ---------
+    Restriction mass flow:
+
+    `mass_flow = sign(P1 - P2) * Cd * A * sqrt(2 * rho * abs(P1 - P2))`
+
+    Parameters
+    ----------
+    name : str
+        Component name
+    network : Network
+        Network that owns this component
+    upstream_pressure : State
+        Upstream pressure
+    downstream_pressure : State
+        Downstream pressure
+    density : State
+        Fluid density
+    discharge_coefficient : float
+        Discharge coefficient
+    cross_sectional_area : float
+        Flow area
+
+    Outputs
+    -------
+    mass_flow : State, optional
+        Computed mass flow rate
+    """
+
+    def __init__(
+        self,
+        name: str,
+        network: Network,
+        upstream_pressure: State,
+        downstream_pressure: State,
+        density: State,
+        discharge_coefficient: float,
+        cross_sectional_area: float,
+        mass_flow: State | None = None,
+    ):
+        self.setup()
+
+    def evaluate_states(self) -> None:
+        P1 = self.upstream_pressure.value
+        P2 = self.downstream_pressure.value
+        rho = self.density.value
+        Cd = self.discharge_coefficient.value
+        A = self.cross_sectional_area.value
+
+        self.mass_flow.value = (
+            np.sign(P1 - P2)
+            * Cd
+            * A
+            * np.sqrt(2.0 * rho * np.abs(P1 - P2))
+        )
+
 
 
 class FlowMixer(Component):
@@ -350,3 +419,169 @@ class Volume(Component):
                 + qdot
             ),
         ]
+    
+
+
+class Bartz(Component):
+    """
+    Bartz convective heat transfer coefficient correlation for
+    compressible flow in rocket thrust chambers and nozzles.
+
+    Correlation
+    -----------
+        h_g = X * σ * G
+
+        X = (0.026 / D^0.2)
+            * (μ0^0.2 * Cp0 / Pr0^0.6)
+            * (mdot / A)^0.8
+
+        σ = (ρ_am / ρ)^0.8
+            * (μ_am / μ0)^0.2
+
+    Optional geometric correction:
+
+        G = D / rc
+
+    where:
+
+        A = π D² / 4
+
+    Parameters
+    ----------
+    name : str
+        Component name
+    network : Network
+        Network that owns this component
+    mass_flow : State
+        Local mass flow rate. The absolute value is used
+    hydraulic_diameter : State or float
+        Local hydraulic diameter or equivalent nozzle diameter
+    chamber_specific_heat_cp : State
+        Specific heat capacity evaluated at stagnation conditions
+    chamber_prandtl_number : State
+        Prandtl number evaluated at stagnation conditions
+    chamber_dynamic_viscosity : State
+        Dynamic viscosity evaluated at stagnation conditions
+    local_freestream_density : State
+        Local gas density at the evaluation location
+    mean_temperature_density : State
+        Gas density evaluated at the arithmetic mean temperature
+        T_am = (T + T_wall) / 2. T is the local freestream static temperature
+    mean_temperature_dynamic_viscosity : State
+        Dynamic viscosity evaluated at the arithmetic mean temperature
+        T_am = (T + T_wall) / 2. T is the local freestream static temperature
+    throat_converging_radius : float, optional
+        Radius of curvature of the throat converging section. When supplied,
+        the geometric correction D / rc is applied
+
+    Outputs
+    -------
+    convection_coefficient : State, optional
+        Gas-side convective heat transfer coefficient. If omitted, a new State is created
+
+    Derived Quantities
+    ------------------
+    Mass flux:
+
+        G_m = mdot / A
+
+    Property correction factor:
+
+        σ = (ρ_am / ρ)^0.8
+            * (μ_am / μ0)^0.2
+
+    Base Bartz coefficient:
+
+        X = (0.026 / D^0.2)
+            * (μ0^0.2 * Cp0 / Pr0^0.6)
+            * G_m^0.8
+
+    Final heat transfer coefficient:
+
+        h_g = X * σ * G
+
+    Assumptions
+    -----------
+    * Turbulent, high-Reynolds-number compressible flow.
+    * Developed for rocket combustion gases.
+    * Chamber properties are evaluated at stagnation conditions.
+    * Local property variation in the boundary layer is
+      represented through the Bartz correction factor σ.
+    * Hydraulic diameter is used as the characteristic length scale.
+    * The nozzle cross section is circular.
+    * Radiation heat transfer is neglected.
+
+    Recommended Use
+    ---------------
+    * Rocket thrust chambers.
+    * Converging-diverging nozzles.
+    * Regeneratively cooled rocket engines.
+    * Preliminary and system-level thermal analyses.
+
+    Notes
+    -----
+    This implementation follows the classical Bartz engineering
+    correlation using chamber (stagnation) transport properties and
+    the mean-temperature correction factor:
+
+        T_am = (T_g + T_w) / 2
+
+    The Bartz correlation is empirical and is most accurate for
+    chemically reacting rocket exhaust gases.
+
+    Bartz tends to underpredict when the effects of radiation are
+    strong, when there is a lot dissociation/recombination in the
+    boundary layer, or when there are significant combustion
+    instabilities.
+
+    Bartz tends to overpredict when soot deposition on the walls is
+    significant or when the combustion is incomplete.
+    """
+    def __init__(self, 
+                 name: str, 
+                 network: Network,
+                 mass_flow: State,
+                 hydraulic_diameter: State | float,
+                 chamber_specific_heat_cp: State,
+                 chamber_prandtl_number: State,
+                 chamber_dynamic_viscosity: State,
+                 local_freestream_density: State,
+                 mean_temperature_density: State,
+                 mean_temperature_dynamic_viscosity: State,
+                 throat_converging_radius: float | None = None,
+                 convection_coefficient: State | None = None):
+        self.setup()
+
+    def evaluate_states(self):
+        mdot = abs(self.mass_flow.value)
+        D = self.hydraulic_diameter.value
+        Cp0 = self.chamber_specific_heat_cp.value
+        Pr0 = self.chamber_prandtl_number.value
+        mu0 = self.chamber_dynamic_viscosity.value
+        rho = self.local_freestream_density.value
+        rho_am = self.mean_temperature_density.value
+        mu_am = self.mean_temperature_dynamic_viscosity.value
+        A = (np.pi/4) * D**2
+
+        if self.throat_converging_radius.is_assigned:
+            rc = self.throat_converging_radius.value
+
+            if rc <= 0.0:
+                raise ValueError(
+                    f"{self.name}: throat_converging_radius must be greater than zero. Got {rc}."
+                )
+            
+            geometric_correction = D/rc
+        else:
+            geometric_correction = 1
+
+        if D <= 0.0:
+            raise ValueError(
+                f"{self.name}: hydraulic_diameter must be greater than zero. Got {D}."
+            )
+        
+        X = (0.026/(D**0.2)) * (mu0**0.2 * Cp0 / Pr0**0.6) * (mdot/A)**0.8
+        sigma = (rho_am/rho)**0.8 * (mu_am/mu0)**0.2
+        hg = X * sigma * geometric_correction
+
+        self.convection_coefficient.value = hg
