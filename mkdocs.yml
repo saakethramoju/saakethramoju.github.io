@@ -3,15 +3,16 @@ site_url: https://saakethramoju.github.io
 
 theme:
   name: material
+  palette:
+    scheme: slate
   features:
     - navigation.sections
     - navigation.top
     - navigation.path
-  palette:
-    scheme: slate
+    - content.code.copy
 
 extra_css:
-  - stylesheets/retro-y2k.css
+  - stylesheets/y2k-nasa.css
 
 nav:
   - Home: index.md

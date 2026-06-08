@@ -1,0 +1,237 @@
+:root {
+  --space: #050914;
+  --navy: #071b36;
+  --blue: #005ea8;
+  --cyan: #65d9ff;
+  --cream: #f6efe1;
+  --cream2: #fffaf0;
+  --ink: #071526;
+  --red: #d62828;
+  --gold: #ffd166;
+
+  --md-primary-fg-color: #071b36;
+  --md-accent-fg-color: #65d9ff;
+}
+
+body,
+.md-container,
+.md-main {
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 2px),
+    radial-gradient(circle, rgba(101,217,255,0.28) 1px, transparent 2px),
+    linear-gradient(180deg, #08152a, #02040a);
+  background-size: 90px 90px, 140px 140px, auto;
+}
+
+.md-content {
+  background: transparent;
+}
+
+.md-grid {
+  max-width: 94rem;
+}
+
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+/* Header */
+.md-header {
+  background: linear-gradient(90deg, #d7d7d7 0%, #ececec 65%, #006d9c 65%);
+  color: var(--ink);
+  border-bottom: 4px solid #111;
+  box-shadow: none;
+}
+
+.md-header__title {
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+
+.md-search__form {
+  background: #075f86;
+  border: 2px solid #07324a;
+}
+
+/* Sidebar */
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  background: rgba(7, 27, 54, 0.96);
+  border: 2px solid var(--cyan);
+  box-shadow: 5px 5px 0 #000;
+  margin: 1rem 0.45rem;
+  padding: 0.55rem;
+}
+
+.md-nav__title {
+  background: #0b355f !important;
+  color: white !important;
+  border: 1px solid var(--cyan);
+  box-shadow: none !important;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+/* Sidebar section headers */
+.md-sidebar--primary .md-nav__item--section > .md-nav__link {
+  background: #0b355f;
+  color: var(--gold) !important;
+  border-left: 4px solid var(--cyan);
+  margin-top: 0.75rem;
+  padding: 0.35rem 0.55rem;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+/* Sidebar links */
+.md-sidebar--primary .md-nav__link {
+  color: #e8f6ff !important;
+  opacity: 1 !important;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.md-sidebar--primary .md-nav__link:hover {
+  color: var(--gold) !important;
+}
+
+/* Active sidebar link */
+.md-sidebar--primary .md-nav__link--active {
+  background: var(--cream);
+  color: var(--ink) !important;
+  border-left: 6px solid var(--red);
+  box-shadow: 3px 3px 0 #000;
+  padding-left: 0.45rem;
+  font-weight: 900;
+}
+
+/* Main content panel */
+.md-content__inner {
+  background: var(--cream2);
+  color: var(--ink);
+  border: 3px solid var(--cyan);
+  box-shadow: 8px 8px 0 #000;
+  padding: 2rem;
+  margin-top: 1.25rem;
+}
+
+/* Breadcrumbs */
+.md-path,
+.md-path a {
+  color: #315f85 !important;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+}
+
+/* Text */
+.md-typeset {
+  color: var(--ink);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.md-typeset h1 {
+  font-family: Impact, "Arial Black", sans-serif;
+  color: #061526;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 2.6rem;
+  border-bottom: 6px solid #111;
+  padding-bottom: 0.55rem;
+  text-shadow: 2px 2px 0 #b6e8ff;
+}
+
+.md-typeset h2 {
+  font-family: Impact, "Arial Black", sans-serif;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 3px solid var(--red);
+  padding-bottom: 0.2rem;
+}
+
+.md-typeset h3 {
+  font-family: "Courier New", monospace;
+  color: #9f1d1d;
+  text-transform: uppercase;
+}
+
+/* Links */
+.md-typeset a {
+  color: #0047b3;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.md-typeset a:hover {
+  color: var(--red);
+}
+
+/* Code */
+.md-typeset code {
+  background: #111827;
+  color: #b7ffb7;
+  border: 1px solid #4fc3f7;
+}
+
+.md-typeset pre {
+  background: #111827 !important;
+  border: 2px solid #4fc3f7;
+  border-left: 6px solid var(--red);
+}
+
+/* Cards */
+.nasa-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+  margin: 1.5rem 0;
+}
+
+.nasa-card {
+  background: #0b355f;
+  color: white;
+  border: 2px solid var(--cyan);
+  border-left: 7px solid var(--red);
+  box-shadow: 5px 5px 0 #000;
+  padding: 1rem;
+}
+
+.nasa-card h3 {
+  color: var(--gold);
+  margin-top: 0;
+}
+
+.nasa-card a {
+  color: var(--cyan);
+}
+
+/* Tables */
+.md-typeset table:not([class]) {
+  border: 2px solid #111;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--navy);
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 76.2344em) {
+  .md-content__inner {
+    margin: 0.75rem;
+    padding: 1rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.8rem;
+  }
+}
