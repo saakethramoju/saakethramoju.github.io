@@ -15,12 +15,26 @@ extra_css:
 
 nav:
   - Home: index.md
+
   - Softwares:
       - Overview: softwares/index.md
+
       - ThermoProp: softwares/thermoprop/index.md
-      - FullFlow: softwares/fullflow/index.md
+
+      - FullFlow:
+          - Overview: softwares/fullflow/index.md
+          - Installation: softwares/fullflow/installation.md
+          - Quick Start: softwares/fullflow/short-example.md
+          - States: softwares/fullflow/states.md
+          - Components:
+              - Overview: softwares/fullflow/components/index.md
+          - Networks: softwares/fullflow/networks.md
+          - Balances: softwares/fullflow/balances.md
+
       - Nozzle Contour Generator: softwares/nozzle-contour-generator/index.md
+
   - Engineering Notes:
       - Overview: engineering-notes/index.md
+
   - Projects:
       - Overview: projects/index.md
