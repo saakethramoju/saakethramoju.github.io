@@ -1,5 +1,17 @@
-site_name: Saaketh Ramoju
+site_name: Saaketh Ramoju Engineering
 site_url: https://saakethramoju.github.io
 
 theme:
   name: material
+
+nav:
+  - Home: index.md
+  - Softwares:
+      - Overview: softwares/index.md
+      - ThermoProp: softwares/thermoprop/index.md
+      - FullFlow: softwares/fullflow/index.md
+      - Nozzle Contour Generator: softwares/nozzle-contour-generator/index.md
+  - Engineering Notes:
+      - Overview: engineering-notes/index.md
+  - Projects:
+      - Overview: projects/index.md

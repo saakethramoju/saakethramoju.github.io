@@ -1,17 +1,25 @@
-# Welcome to MkDocs
+# Saaketh Ramoju Engineering
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to my engineering and software documentation site.
 
-## Commands
+This site collects my Python software documentation, engineering notes, rocket propulsion references, and project writeups.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Software
 
-## Project layout
+Documentation for my Python tools:
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- [ThermoProp](softwares/thermoprop/)
+- [FullFlow](softwares/fullflow/)
+- [Nozzle Contour Generator](softwares/nozzle-contour-generator/)
+
+## Engineering Notes
+
+Notes on fluid systems, heat transfer, propulsion, numerical methods, and related engineering topics.
+
+- [Engineering Notes](engineering-notes/)
+
+## Projects
+
+Project documentation, analysis notes, and technical writeups.
+
+- [Projects](projects/)
