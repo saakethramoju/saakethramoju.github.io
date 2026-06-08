@@ -123,9 +123,18 @@
   margin-bottom: 0;
 }
 
-.ff-desc code {
-  white-space: normal;
-  overflow-wrap: anywhere;
+.ff-desc code,
+.ff-table td:nth-child(3) code {
+  display: inline-block;
+  padding: 0.04rem 0.28rem;
+  background: rgba(8, 33, 63, 0.92);
+  color: #fff7e8;
+  border: 1px solid var(--cyan);
+  box-shadow: 2px 2px 0 #000;
+  font-family: "Courier New", monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* Equation blocks */

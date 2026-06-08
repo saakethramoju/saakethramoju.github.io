@@ -466,7 +466,7 @@ class Bartz(Component):
         Local gas density at the evaluation location
     mean_temperature_density : State
         Gas density evaluated at the arithmetic mean temperature
-        T_am = (T + T_wall) / 2. T is the local freestream static temperature
+        `T_am = (T + T_wall) / 2`. T is the local freestream static temperature.
     mean_temperature_dynamic_viscosity : State
         Dynamic viscosity evaluated at the arithmetic mean temperature
         T_am = (T + T_wall) / 2. T is the local freestream static temperature
