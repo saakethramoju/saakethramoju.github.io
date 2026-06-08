@@ -9,7 +9,7 @@ This short example will first go over static evaluation, then a steady-state sol
 
 ## Initialize a Network
 
-Because all Components, Balances, Models, and Solvers requires a network object input, it is usually best to define the Network first. A Network is a simpply a container for all component
+Because all components, balances, models, and solvers require a network object input, it is usually best to define the Network first. A `Network` is simply a container for all components, states, residuals, and tracked outputs.
 
 ```python
 from fullflow import Network
@@ -149,7 +149,7 @@ Line1Friction = Colebrook(
 )
 ```
 
-In order to determine the node's temperature and pressure, we node a `Volume` Component:
+In order to determine the node's temperature and pressure, we need a `Volume` Component:
 
 ```python
 Node1 = Volume(
@@ -163,7 +163,7 @@ Node1 = Volume(
 )
 ```
 
-For a static evaluation or steady-state simulation, the volume actually doesn't matter. Instead of temperature, the node will iterate on enthalpy as a way to account for saturated fluid states (temperature is constant during a phase change). However, the node lookup was initialized with pressure and temperature, which makes those the default flash parameters for the lookup (the lookup gets all properties from pressure and temperature, so enthalpy would be derived from those two values, and it would not be an independent iterable). To solve this, a `flash_values` input can be provided to the lookup:
+For a static evaluation or steady-state simulation, the volume value does not affect the algebraic residuals. Instead of temperature, the node will iterate on enthalpy as a way to account for saturated fluid states (temperature is constant during a phase change). However, the node lookup was initialized with pressure and temperature, which makes those the default flash parameters for the lookup (the lookup gets all properties from pressure and temperature, so enthalpy would be derived from those two values, and it would not be an independent iterable). To solve this, a `flash_values` input can be provided to the lookup:
 
 ```python
 NodeFluid = FluidLookup(
@@ -178,10 +178,10 @@ NodeFluid = FluidLookup(
 
 Even though `mass_flow_out` is needed to create a finite residual, it is not inputted here in this Component. Instead, to avoid creating an external State, `Node1.mass_flow_out` will simply be passed in as an input to the downstream branch's mass flow attribute.
 
-The downstream branch will be a `DischargeCoefficient` branch, where the effective area, $CdA$, is known from experimental data.
+The downstream branch will be a `DischargeCoefficient` branch, where the effective area, $C_dA$, is known from experimental data.
 
 ```python
-Line1 = DischargeCoefficient(
+Line2 = DischargeCoefficient(
     "Line 2",
     ExampleNetwork,
     upstream_pressure=Node1.pressure,
@@ -193,9 +193,9 @@ Line1 = DischargeCoefficient(
 )
 ```
 
-## Run a Static Evalulation
+## Run a Static Evaluation
 
-A static evaluation simply evaluates all of the components in the Network with the current State values (so the guess values). There are multiple ways to do this:
+A static evaluation simply evaluates all of the components in the Network with the current State values (so the guess values). Static evaluation is useful for debugging because it shows whether each component can evaluate successfully before the nonlinear solver is run. There are multiple ways to do this:
 
 ```python
 SteadyState(ExampleNetwork).static_evaluate(verbose=True, print_solution=True)
@@ -208,7 +208,7 @@ SteadyState(ExampleNetwork).solve(static=True, verbose=True, print_solution=True
 ```
 
 The `verbose` and `print_solution` attributes are optional and are useful for viewing the result in the terminal window.
-Either way, the evalulation yields the same result. So the full code is:
+Either way, the evaluation yields the same result. So the full code is:
 
 ```python
 from fullflow import *
@@ -272,7 +272,7 @@ Node1 = Volume(
     mass_flow_in=Line1.mass_flow
 )
 
-Line1 = DischargeCoefficient(
+Line2 = DischargeCoefficient(
     "Line 2",
     ExampleNetwork,
     upstream_pressure=Node1.pressure,
@@ -357,7 +357,7 @@ The result is:
 
 ## Run a Steady-State Simulation
 
-With the Network set up, running a steady-state simulation is just a metter of altering the `.solve()` call.
+With the Network set up, running a steady-state simulation is just a matter of altering the `.solve()` call.
 
 ```python
 SteadyState(ExampleNetwork).solve(verbose=True, print_solution=True)
@@ -427,7 +427,7 @@ Node1 = Volume(
     mass_flow_in=Line1.mass_flow
 )
 
-Line1 = DischargeCoefficient(
+Line2 = DischargeCoefficient(
     "Line 2",
     ExampleNetwork,
     upstream_pressure=Node1.pressure,
@@ -446,7 +446,7 @@ The result is:
 ??? success "Steady-State Solver Solution"
 
     ```text
-                            Steady-State Solver Summary                            
+                            Steady-State Solver Summary
 
       Quantity                                                                  Value
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -455,7 +455,7 @@ The result is:
       Message                              `xtol` termination condition is satisfied.
       Solver method                                                               trf
       Jacobian method                                                         3-point
-      Solve time                                                              0.023 s
+      Solve time                                                              0.011 s
       Function evaluations                                                          5
       Jacobian evaluations                                                          5
       Cost                                                               4.320292e-18
@@ -553,7 +553,7 @@ Deviations from reality in the solution could have happened because of:
 * Using the `SourceFluid` enthalpy as the total enthalpy into the node instead of the enthalpy exiting `Line1`
 * Using only the upstream viscosities and densities for the branches.
 
-The improve density issue, we can use State math to define a derived State that passes the average density of `SourceFluid` and `NodeFluid` to `Line1`:
+To improve the density estimate, we can use State math to define a derived State that passes the average density of `SourceFluid` and `NodeFluid` to `Line1`:
 
 ```python
 line1_density = 0.5*(SourceFluid.density + NodeFluid.density)
@@ -625,7 +625,7 @@ Node1 = Volume(
     mass_flow_in=Line1.mass_flow
 )
 
-Line1 = DischargeCoefficient(
+Line2 = DischargeCoefficient(
     "Line 2",
     ExampleNetwork,
     upstream_pressure=Node1.pressure,
@@ -653,7 +653,7 @@ Now the result is:
       Message                              `xtol` termination condition is satisfied.
       Solver method                                                               trf
       Jacobian method                                                         3-point
-      Solve time                                                              0.017 s
+      Solve time                                                              0.011 s
       Function evaluations                                                          5
       Jacobian evaluations                                                          5
       Cost                                                               1.145189e-18

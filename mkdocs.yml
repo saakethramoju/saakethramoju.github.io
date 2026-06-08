@@ -3,6 +3,8 @@ site_url: https://saakethramoju.github.io
 
 theme:
   name: material
+  icon:
+    logo: material/rocket-launch
   palette:
     scheme: slate
   features:
