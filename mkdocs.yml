@@ -52,9 +52,26 @@ nav:
               - Custom Components: softwares/fullflow/components/custom-components.md
               - Nodes:
                   - Overview: softwares/fullflow/components/nodes/index.md
-                  - Boundary: softwares/fullflow/components/nodes/boundary.md
+                  - Boundaries:
+                      - Boundary: softwares/fullflow/components/nodes/boundaries/boundary.md
+                      - Pressure Boundary: softwares/fullflow/components/nodes/boundaries/pressure-boundary.md
+                      - Temperature Boundary: softwares/fullflow/components/nodes/boundaries/temperature-boundary.md
+                  - Volumes:
+                      - Simple Volume: softwares/fullflow/components/nodes/volumes/simple-volume.md
+                      - Volume: softwares/fullflow/components/nodes/volumes/volume.md
+                  - Solids:
+                      - Solid: softwares/fullflow/components/nodes/solids/solid.md
+                  - Tanks:
+                      - Simple Tank: softwares/fullflow/components/nodes/tanks/simple-tank.md
+                      - Pressurized Tank: softwares/fullflow/components/nodes/tanks/pressurized-tank.md
+                  - Combustion Chambers:
+                      - Main Combustion Chamber: softwares/fullflow/components/nodes/combustion-chambers/main-combustion-chamber.md
+                  - Junctions:
+                      - Flow Splitter: softwares/fullflow/components/nodes/junctions/flow-splitter.md
+                      - Flow Mixer: softwares/fullflow/components/nodes/junctions/flow-mixer.md
           - Networks: softwares/fullflow/networks.md
           - Balances: softwares/fullflow/balances.md
+          - Compositions: softwares/fullflow/compositions.md
 
       - Nozzle Contour Generator: softwares/nozzle-contour-generator/index.md
 

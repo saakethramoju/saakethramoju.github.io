@@ -11,15 +11,31 @@ sys.path.insert(0, str(ROOT))
 
 def define_env(env):
     @env.macro
-    def fullflow_api(path: str) -> str:
+    def fullflow_api(
+        path: str,
+        show_description: bool = False,
+        prepend_description: str = "",
+        append_description: str = "",
+    ) -> str:
         """Render a FullFlow class reference from its docstring."""
         obj = _import_object(path)
         doc = inspect.getdoc(obj) or ""
+
         parsed = _parse_numpy_docstring(doc)
+        summary = _summary(doc)
+
+        description_html = _description_block(
+            summary=summary,
+            show_description=show_description,
+            prepend_description=prepend_description,
+            append_description=append_description,
+        )
 
         return f"""
 <div class="ff-api">
   <div class="ff-object-path">{html.escape(path)}</div>
+
+  {description_html}
 
   {_section("Parameters", _table(parsed.get("Parameters", "")))}
   {_section("Outputs", _table(parsed.get("Outputs", "")))}
@@ -34,6 +50,62 @@ def _import_object(path: str):
     module_name, object_name = path.rsplit(".", 1)
     module = importlib.import_module(module_name)
     return getattr(module, object_name)
+
+
+def _description_block(
+    summary: str,
+    show_description: bool,
+    prepend_description: str,
+    append_description: str,
+) -> str:
+    """Render the optional description block above the API tables."""
+    parts = []
+
+    if prepend_description:
+        parts.append(_description(prepend_description.strip()))
+
+    if show_description and summary:
+        parts.append(summary)
+
+    if append_description:
+        parts.append(_description(append_description.strip()))
+
+    if not parts:
+        return ""
+
+    return f"""
+<div class="ff-summary">
+  {''.join(parts)}
+</div>
+"""
+
+
+def _summary(doc: str) -> str:
+    """Extract the leading description before the first NumPy-style section."""
+    if not doc:
+        return ""
+
+    lines = doc.splitlines()
+    summary_lines: list[str] = []
+
+    i = 0
+    while i < len(lines):
+        stripped = lines[i].strip()
+
+        is_section = (
+            stripped
+            and i + 1 < len(lines)
+            and lines[i + 1].strip()
+            and set(lines[i + 1].strip()) == {"-"}
+        )
+
+        if is_section:
+            break
+
+        summary_lines.append(lines[i])
+        i += 1
+
+    return _description("\n".join(summary_lines).strip())
 
 
 def _parse_numpy_docstring(doc: str) -> dict[str, str]:
@@ -143,19 +215,27 @@ def _parse_fields(text: str) -> list[tuple[str, str, str]]:
 
 
 def _description(text: str, show_equations: bool = False) -> str:
-    """Render a field description with optional equation blocks."""
+    """Render a field description with equation blocks."""
     if not text:
         return ""
 
     lines = text.splitlines()
     output: list[str] = []
+    paragraph_lines: list[str] = []
     equation_lines: list[str] = []
     in_equation = False
+
+    def flush_paragraph() -> None:
+        if paragraph_lines:
+            paragraph = " ".join(line.strip() for line in paragraph_lines if line.strip())
+            output.append(f"<p>{_inline_code(paragraph)}</p>")
+            paragraph_lines.clear()
 
     for raw_line in lines:
         stripped = raw_line.strip()
 
         if stripped == "Equation:":
+            flush_paragraph()
             in_equation = True
             continue
 
@@ -171,10 +251,14 @@ def _description(text: str, show_equations: bool = False) -> str:
             continue
 
         if stripped:
-            output.append(f"<p>{_inline_code(stripped)}</p>")
+            paragraph_lines.append(stripped)
+        else:
+            flush_paragraph()
 
     if equation_lines:
         output.append(_equation(equation_lines))
+
+    flush_paragraph()
 
     return "\n".join(output)
 
