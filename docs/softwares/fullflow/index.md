@@ -519,7 +519,7 @@ Please open an issue if you encounter a problem or would like to propose an enha
 
 GitHub:
 
-https://github.com/saakethramoju/FullFlow
+[https://github.com/saakethramoju/FullFlow](https://github.com/saakethramoju/FullFlow)
 
 ## License
 
