@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - run: pip install mkdocs mkdocs-material
+      - run: pip install mkdocs mkdocs-material pymdown-extensions
 
       - run: mkdocs build
 
