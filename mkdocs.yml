@@ -6,7 +6,6 @@ theme:
   palette:
     scheme: slate
   features:
-    - navigation.sections
     - navigation.top
     - navigation.path
     - content.code.copy
