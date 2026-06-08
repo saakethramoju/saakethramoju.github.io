@@ -8,18 +8,18 @@ This site collects my Python software documentation, engineering notes, rocket p
 
 Documentation for my Python tools:
 
-- [ThermoProp](softwares/thermoprop/)
-- [FullFlow](softwares/fullflow/)
-- [Nozzle Contour Generator](softwares/nozzle-contour-generator/)
+- [ThermoProp](softwares/thermoprop/index.md)
+- [FullFlow](softwares/fullflow/index.md)
+- [Nozzle Contour Generator](softwares/nozzle-contour-generator/index.md)
 
 ## Engineering Notes
 
-Notes on fluid systems, heat transfer, propulsion, numerical methods, and related engineering topics.
+Notes on various math, physics, and engineering topics
 
-- [Engineering Notes](engineering-notes/)
+[Engineering Notes](engineering-notes/index.md)
 
 ## Projects
 
-Project documentation, analysis notes, and technical writeups.
+Some of the cool projects I've worked on:
 
-- [Projects](projects/)
+[Projects](projects/index.md)
