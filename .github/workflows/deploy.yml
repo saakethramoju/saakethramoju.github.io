@@ -27,9 +27,7 @@ jobs:
 
       - run: pip install mkdocs mkdocs-material pymdown-extensions mkdocs-macros-plugin
 
-      - run: pip install git+https://github.com/saakethramoju/ThermoProp.git@main
-
-      - run: pip install git+https://github.com/saakethramoju/FullFlow.git@main
+      - run: pip install thermoprop fullflow
 
       - run: mkdocs build
 
