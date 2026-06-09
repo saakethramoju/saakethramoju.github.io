@@ -1,4 +1,4 @@
 # Bartz
 
-{{ fullflow_api("test_api.test.Bartz", 
+{{ fullflow_api("fullflow.Bartz", 
 show_description=True) }}

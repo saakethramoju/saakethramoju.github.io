@@ -40,7 +40,7 @@ def define_env(env):
   {_section("Parameters", _table(parsed.get("Parameters", "")))}
   {_section("Outputs", _table(parsed.get("Outputs", "")))}
   {_section("Iteration Variables", _table(parsed.get("Iteration Variables", "")))}
-  {_section("Residuals", _table(parsed.get("Residuals", ""), show_equations=True))}
+  {_section("Residuals", _table(parsed.get("Residuals", "")))}
 </div>
 """
 
@@ -141,7 +141,7 @@ def _parse_numpy_docstring(doc: str) -> dict[str, str]:
     return {key: "\n".join(value).strip() for key, value in sections.items()}
 
 
-def _table(text: str, show_equations: bool = False) -> str:
+def _table(text: str) -> str:
     """Render a NumPy-style field section as a simple table."""
     rows = _parse_fields(text)
 
@@ -155,7 +155,7 @@ def _table(text: str, show_equations: bool = False) -> str:
             "<tr>"
             f"<td class='ff-name'>{_code(name)}</td>"
             f"<td class='ff-type'>{_code(typ)}</td>"
-            f"<td class='ff-desc'>{_description(desc, show_equations)}</td>"
+            f"<td class='ff-desc'>{_description(desc)}</td>"
             "</tr>"
         )
 
@@ -213,64 +213,47 @@ def _parse_fields(text: str) -> list[tuple[str, str, str]]:
 
     return rows
 
-
-def _description(text: str, show_equations: bool = False) -> str:
-    """Render a field description with equation blocks."""
+def _description(text: str) -> str:
+    """Render description text with inline code and display equations."""
     if not text:
         return ""
 
-    lines = text.splitlines()
+    # Capture double-backtick display equations, including multiline equations.
+    parts = re.split(r"(``.*?``)", text, flags=re.DOTALL)
+
     output: list[str] = []
-    paragraph_lines: list[str] = []
-    equation_lines: list[str] = []
-    in_equation = False
 
-    def flush_paragraph() -> None:
-        if paragraph_lines:
-            paragraph = " ".join(line.strip() for line in paragraph_lines if line.strip())
-            output.append(f"<p>{_inline_code(paragraph)}</p>")
-            paragraph_lines.clear()
+    for part in parts:
+        part = part.strip()
 
-    for raw_line in lines:
-        stripped = raw_line.strip()
-
-        if stripped == "Equation:":
-            flush_paragraph()
-            in_equation = True
+        if not part:
             continue
 
-        if in_equation:
-            if stripped:
-                equation_lines.append(stripped)
-                continue
-
-            if equation_lines:
-                output.append(_equation(equation_lines))
-                equation_lines = []
-                in_equation = False
+        if part.startswith("``") and part.endswith("``"):
+            equation = part[2:-2].strip()
+            output.append(_equation(equation))
             continue
 
-        if stripped:
-            paragraph_lines.append(stripped)
-        else:
-            flush_paragraph()
+        paragraphs = re.split(r"\n\s*\n", part)
 
-    if equation_lines:
-        output.append(_equation(equation_lines))
+        for paragraph in paragraphs:
+            paragraph = " ".join(
+                line.strip() for line in paragraph.splitlines() if line.strip()
+            )
 
-    flush_paragraph()
+            if paragraph:
+                output.append(f"<p>{_inline_code(paragraph)}</p>")
 
     return "\n".join(output)
 
 
-def _equation(lines: list[str]) -> str:
-    """Render equation lines as a readable equation block."""
-    equation = "\n".join(html.escape(line) for line in lines)
-    return f"<pre class='ff-equation'><code>{equation}</code></pre>"
-
+def _equation(text: str) -> str:
+    """Render text as a display equation block."""
+    equation = html.escape(text.strip())
+    return f"<div class='ff-equation'><code>{equation}</code></div>"
 
 def _inline_code(text: str) -> str:
-    """Convert backtick spans to inline code."""
+    """Convert single-backtick spans to inline code."""
     escaped = html.escape(text)
 
     return re.sub(
