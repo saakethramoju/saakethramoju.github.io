@@ -50,6 +50,12 @@ nav:
           - Components:
               - Overview: softwares/fullflow/components/index.md
               - Custom Components: softwares/fullflow/components/custom-components.md
+              - Lookups:
+                  - Fluid Property Reference Adjustment: softwares/fullflow/components/lookups/reference-adjustment.md
+                  - Real Fluid Lookup: softwares/fullflow/components/lookups/fluid-lookup.md
+                  - Ideal Gas Lookup: softwares/fullflow/components/lookups/ideal-gas-lookup.md
+                  - Propellant Lookup: softwares/fullflow/components/lookups/propellant-lookup.md
+                  - Material Lookup: softwares/fullflow/components/lookups/material-lookup.md
               - Nodes:
                   - Overview: softwares/fullflow/components/nodes/index.md
                   - Boundaries:
