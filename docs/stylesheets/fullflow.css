@@ -48,11 +48,24 @@
 /* Tables */
 .ff-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin: 0.4rem 0 1.4rem;
   background: rgba(234, 220, 196, 0.25);
   border: 2px solid rgba(7, 21, 38, 0.75);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
+}
+
+.ff-col-name {
+  width: 28%;
+}
+
+.ff-col-type {
+  width: 22%;
+}
+
+.ff-col-description {
+  width: 50%;
 }
 
 .ff-table th {
@@ -69,6 +82,7 @@
 }
 
 .ff-table td {
+  min-width: 0;
   padding: 0.45rem 0.55rem;
   border-bottom: 1px solid rgba(7, 21, 38, 0.18);
   color: var(--ink);
@@ -82,25 +96,26 @@
 }
 
 /* Name column */
-.ff-table th:nth-child(1),
-.ff-table td:nth-child(1) {
-  width: 12rem;
-  min-width: 12rem;
-  white-space: nowrap;
+.ff-name,
+.ff-name code {
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 /* Type column */
-.ff-table th:nth-child(2),
-.ff-table td:nth-child(2) {
-  width: 8rem;
-  min-width: 8rem;
-  white-space: nowrap;
+.ff-type,
+.ff-type code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Description column */
-.ff-table th:nth-child(3),
-.ff-table td:nth-child(3) {
-  width: auto;
+.ff-desc {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Generic code */
@@ -113,7 +128,6 @@
   font-family: "Courier New", monospace;
   font-size: 0.86rem;
   font-weight: 600;
-  white-space: nowrap;
 }
 
 /* Keep path bright */
@@ -121,9 +135,22 @@
   color: #fff7e8;
   font-size: 0.95rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 /* Description formatting */
+.ff-summary ul,
+.ff-desc ul {
+  margin: 0.4rem 0 0.7rem 1.4rem;
+  padding-left: 0.2rem;
+}
+
+.ff-summary li,
+.ff-desc li {
+  margin: 0.15rem 0;
+  line-height: 1.5;
+}
+
 .ff-desc p {
   margin: 0 0 0.35rem;
   max-width: none;
@@ -145,14 +172,16 @@
   font-family: "Courier New", monospace;
   font-size: 0.82rem;
   font-weight: 700;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Display equation blocks */
 .ff-equation {
   display: block;
   box-sizing: border-box;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   min-width: 0;
   margin: 0.45rem 0 0.65rem;
@@ -181,6 +210,7 @@
 .ff-desc .ff-equation code,
 .ff-equation code {
   display: block;
+  width: 100%;
   max-width: 100%;
   min-width: 0;
   padding: 0;
@@ -204,24 +234,21 @@
     padding: 0.24rem 0.55rem;
   }
 
+  .ff-col-name,
+  .ff-col-type,
+  .ff-col-description {
+    width: auto;
+  }
+
   .ff-table th,
   .ff-table td {
     padding: 0.4rem;
-  }
-
-  .ff-table th:nth-child(1),
-  .ff-table td:nth-child(1),
-  .ff-table th:nth-child(2),
-  .ff-table td:nth-child(2) {
-    width: auto;
-    min-width: 0;
-    white-space: normal;
-    overflow-wrap: anywhere;
   }
 
   .ff-desc code,
   .ff-table td:nth-child(3) code {
     white-space: normal;
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }

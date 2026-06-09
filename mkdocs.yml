@@ -130,6 +130,15 @@ nav:
           - Networks: softwares/fullflow/networks.md
           - Balances: softwares/fullflow/balances.md
           - Compositions: softwares/fullflow/compositions.md
+          - Model: softwares/fullflow/model.md
+          - Model Input: softwares/fullflow/model-option.md
+          - Solvers:
+              - Steady-State:
+                  - Overview: softwares/fullflow/solvers/steady-state/index.md
+                  - SteadyState.solve: softwares/fullflow/solvers/steady-state/solve.md
+                  - SteadyState.static_evaluate: softwares/fullflow/solvers/steady-state/static_evaluate.md
+              - Transient:
+                  - Overview: softwares/fullflow/solvers/transient/index.md
 
       - Nozzle Contour Generator: softwares/nozzle-contour-generator/index.md
 

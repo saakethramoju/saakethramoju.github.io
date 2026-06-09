@@ -38,6 +38,7 @@ def define_env(env):
   {description_html}
 
   {_section("Parameters", _table(parsed.get("Parameters", "")))}
+  {_section("Returns", _table(parsed.get("Returns", "")))}
   {_section("Outputs", _table(parsed.get("Outputs", "")))}
   {_section("Iteration Variables", _table(parsed.get("Iteration Variables", "")))}
   {_section("Residuals", _table(parsed.get("Residuals", "")))}
@@ -46,10 +47,23 @@ def define_env(env):
 
 
 def _import_object(path: str):
-    """Import an object from a dotted module path."""
-    module_name, object_name = path.rsplit(".", 1)
-    module = importlib.import_module(module_name)
-    return getattr(module, object_name)
+    """Import an object from a dotted module or attribute path."""
+    parts = path.split(".")
+
+    for i in range(len(parts), 0, -1):
+        module_name = ".".join(parts[:i])
+
+        try:
+            obj = importlib.import_module(module_name)
+        except ModuleNotFoundError:
+            continue
+
+        for attr in parts[i:]:
+            obj = getattr(obj, attr)
+
+        return obj
+
+    raise ImportError(f"Could not import object from path {path!r}.")
 
 
 def _description_block(
@@ -161,6 +175,11 @@ def _table(text: str) -> str:
 
     return f"""
 <table class="ff-table">
+  <colgroup>
+    <col class="ff-col-name">
+    <col class="ff-col-type">
+    <col class="ff-col-description">
+  </colgroup>
   <thead>
     <tr>
       <th>Name</th>
@@ -213,6 +232,7 @@ def _parse_fields(text: str) -> list[tuple[str, str, str]]:
 
     return rows
 
+
 def _description(text: str) -> str:
     """Render description text with inline code and display equations."""
     if not text:
@@ -237,12 +257,28 @@ def _description(text: str) -> str:
         paragraphs = re.split(r"\n\s*\n", part)
 
         for paragraph in paragraphs:
-            paragraph = " ".join(
-                line.strip() for line in paragraph.splitlines() if line.strip()
-            )
 
-            if paragraph:
-                output.append(f"<p>{_inline_code(paragraph)}</p>")
+            lines = [
+                line.strip()
+                for line in paragraph.splitlines()
+                if line.strip()
+            ]
+
+            if not lines:
+                continue
+
+            # bullet list
+            if all(line.startswith("* ") for line in lines):
+                items = "".join(
+                    f"<li>{_inline_code(line[2:])}</li>"
+                    for line in lines
+                )
+
+                output.append(f"<ul>{items}</ul>")
+                continue
+
+            text = " ".join(lines)
+            output.append(f"<p>{_inline_code(text)}</p>")
 
     return "\n".join(output)
 
@@ -251,6 +287,7 @@ def _equation(text: str) -> str:
     """Render text as a display equation block."""
     equation = html.escape(text.strip())
     return f"<div class='ff-equation'><code>{equation}</code></div>"
+
 
 def _inline_code(text: str) -> str:
     """Convert single-backtick spans to inline code."""
@@ -265,7 +302,14 @@ def _inline_code(text: str) -> str:
 
 def _code(text: str) -> str:
     """Render plain text as inline code."""
-    return f"<code>{html.escape(text)}</code>"
+    escaped = html.escape(text)
+
+    escaped = escaped.replace(
+        "_",
+        "_<wbr>"
+    )
+
+    return f"<code>{escaped}</code>"
 
 
 def _section(title: str, content: str) -> str:
