@@ -5,7 +5,9 @@ theme:
   name: material
   icon:
     logo: material/rocket-launch
-
-
+  palette:
+    scheme: slate
+    primary: black
+    
 nav:
   - Home: index.md
