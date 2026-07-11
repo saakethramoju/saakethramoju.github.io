@@ -75,7 +75,12 @@ nav:
           - Polytropic Pump: fullflow/turbomachinery/polytropic-pump.md
           - Gas Turbine: fullflow/turbomachinery/gas-turbine.md
 
-  - FullPlot: fullplot/index.md
+  - FullPlot:
+      - Overview: fullplot/index.md
+      - HDF5 Files: fullplot/hdf5-files.md
+      - Plotting: fullplot/plotting.md
+      - Maps: fullplot/maps.md
+      - Traces: fullplot/traces.md
 
   - ThermoProp:
       - Overview: thermoprop/index.md
@@ -89,3 +94,9 @@ nav:
       - CEADatabase: thermoprop/cea-database.md
       - SpeciesDatabase: thermoprop/species-database.md
       - MaterialDatabase: thermoprop/material-database.md
+
+
+  - Notes:
+    - Nozzle Design:
+      - Getting Started: notes/nozzle-design/index.md
+    - Entropy: notes/entropy.md
