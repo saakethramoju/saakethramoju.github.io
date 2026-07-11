@@ -8,6 +8,84 @@ theme:
   palette:
     scheme: slate
     primary: black
-    
+
+extra:
+  generator: false
+
 nav:
   - Home: index.md
+
+  - FullFlow:
+      - Overview: fullflow/index.md
+      - State: fullflow/state.md
+      - Component: fullflow/component.md
+      - Network: fullflow/network.md
+      - Balance: fullflow/balance.md
+      - Model: fullflow/model.md
+      - Custom Components: fullflow/custom-components.md
+      - Exporting: fullflow/exporting.md
+      - Lookup: fullflow/lookup.md
+      - Map: fullflow/map.md
+      - Sequence: fullflow/sequence.md
+      - Sensor: fullflow/sensor.md
+      - Composition: fullflow/composition.md
+      - PID: fullflow/pid.md
+      - Actuator: fullflow/actuator.md
+      - Nodes:
+          - Volume: fullflow/nodes/volume.md
+          - Solid: fullflow/nodes/solid.md
+      - Fluid Flow:
+          - Flow Tube: fullflow/fluid-flow/flow-tube.md
+          - Adiabatic Flow: fullflow/fluid-flow/adiabatic-flow.md
+          - Discharge Coefficient: fullflow/fluid-flow/discharge-coefficient.md
+          - Darcy Weisbach: fullflow/fluid-flow/darcy-weisbach.md
+          - Cavitating-Venturi: fullflow/fluid-flow/cavitating-venturi.md
+          - Compressible Orifice: fullflow/fluid-flow/compressible-orifice.md
+          - Isentropic Nozzle: fullflow/fluid-flow/isentropic-nozzle.md
+          - Hydraulic Diameter: fullflow/fluid-flow/hydraulic-diameter.md
+          - Churchill: fullflow/fluid-flow/churchill.md
+          - Colebrook: fullflow/fluid-flow/colebrook.md
+          - Petukhov Friction: fullflow/fluid-flow/petukhov-friction.md
+          - Poiseuille Number: fullflow/fluid-flow/poiseuille-number.md
+      - Heat Transfer:
+          - Conduction: fullflow/heat-transfer/conduction.md
+          - Convection: fullflow/heat-transfer/convection.md
+          - Natural Convection: fullflow/heat-transfer/natural-convection.md
+          - Radiation: fullflow/heat-transfer/radiation.md
+          - Ambient Radiation: fullflow/heat-transfer/ambient-radiation.md
+          - Adiabatic Wall Temperature: fullflow/heat-transfer/adiabatic-wall-temperature.md
+          - Temperature Recovery Factor: fullflow/heat-transfer/temperature-recovery-factor.md
+          - Eckert Reference Temperature: fullflow/heat-transfer/eckert-reference-temperature.md
+          - Bartz: fullflow/heat-transfer/bartz.md
+          - Churchill-Chu: fullflow/heat-transfer/churchill-chu.md
+          - Dittus-Boelter: fullflow/heat-transfer/dittus-boelter.md
+          - Gnielinski: fullflow/heat-transfer/gnielinski.md
+          - Miropolskii: fullflow/heat-transfer/miropolskii.md
+          - Petukhov: fullflow/heat-transfer/petukhov.md
+          - Sieder-Tate: fullflow/heat-transfer/sieder-tate.md
+      - Rocket Performance:
+          - Ideal Characteristic Velocity: fullflow/rocket-performance/ideal-characteristic-velocity.md
+          - Specific Impulse: fullflow/rocket-performance/specific-impulse.md
+      - Solvers:
+          - Steady State: fullflow/solvers/steady-state.md
+          - Transient: fullflow/solvers/transient.md
+      - Turbomachinery:
+          - Rotor: fullflow/turbomachinery/rotor.md
+          - Constant Density Pump: fullflow/turbomachinery/constant-density-pump.md
+          - Polytropic Pump: fullflow/turbomachinery/polytropic-pump.md
+          - Gas Turbine: fullflow/turbomachinery/gas-turbine.md
+
+  - FullPlot: fullplot/index.md
+
+  - ThermoProp:
+      - Overview: thermoprop/index.md
+      - Fluid: thermoprop/fluid.md
+      - IdealGas: thermoprop/ideal-gas.md
+      - Material: thermoprop/material.md
+      - Propellant: thermoprop/propellant.md
+      - CombustionGas: thermoprop/combustion-gas.md
+      - Reactants: thermoprop/reactants.md
+      - Equilibrium: thermoprop/equilibrium.md
+      - CEADatabase: thermoprop/cea-database.md
+      - SpeciesDatabase: thermoprop/species-database.md
+      - MaterialDatabase: thermoprop/material-database.md
