@@ -45,6 +45,14 @@ ThermoProp requires at least version 3.11 of Python. Therefore, the easiest way 
 pip3 install thermoprop
 ```
 
+(ThermoProp is on PyPi: [pypi.org/project/thermoprop/](https://pypi.org/project/thermoprop/))
+
+## GitHub Repository
+
+The source code is stored here: [github.com/saakethramoju/ThermoProp](https://github.com/saakethramoju/ThermoProp).
+
+The repo's README contains a thorough startup guide, and the examples folder provides several example scripts that describe the utilities of ThermoProp in detail.
+
 ## Main Features
 
 ThermoProp offers several wrapper classes for convenience:
@@ -129,3 +137,67 @@ The issue is usually that different packages use different reference points. For
 * Transport properties
 
 When combining results from multiple wrappers, establish a consistent thermodynamic reference basis if absolute values are required.
+
+## Units
+
+ThermoProp's public API uses SI units.
+
+
+| Quantity             | Unit                                |
+| -------------------- | ----------------------------------- |
+| Pressure             | Pa                                  |
+| Temperature          | K                                   |
+| Density              | kg/m³                               |
+| Specific volume      | m³/kg                               |
+| Enthalpy             | J/kg                                |
+| Internal energy      | J/kg                                |
+| Entropy              | J/kg-K                              |
+| Specific heat        | J/kg-K                              |
+| Dynamic viscosity    | Pa-s                                |
+| Kinematic viscosity  | m²/s                                |
+| Thermal conductivity | W/m-K                               |
+| Surface tension      | N/m                                 |
+| Molar mass           | kg/mol                              |
+| Molecular weight     | kg/kmol, numerically equal to g/mol |
+| Material strength    | Pa                                  |
+
+
+## Limitations
+
+ThermoProp wraps and combines several independent property sources.
+
+Property availability depends on:
+
+* The selected wrapper
+* The selected species or material
+* Backend support
+* Temperature range
+* Pressure range
+* Phase
+* Availability of NASA CEA transport data
+
+Use runtime introspection methods such as `supported_properties()`, `supported_flash_inputs()`, and `data_sources` where available.
+
+## Acknowledgements
+
+ThermoProp incorporates, depends on, or adapts data from:
+
+* CoolProp
+* PYroMat
+* RocketProps
+* NASA CEA / CEAM
+* MatProtLib
+* NumPy
+* SciPy
+
+ThermoProp's engineering material database was adapted from material property data compiled and distributed through the MatProtLib project.
+
+Special thanks to Tyson Tran and the MatProtLib project for making engineering material datasets publicly available.
+
+The author also gratefully acknowledges the NASA Glenn Research Center and the NASA CEA development team for making thermochemical and transport datasets publicly available.
+
+
+## Sources
+
+!!! info
+    This section is under construction

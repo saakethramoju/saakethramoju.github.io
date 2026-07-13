@@ -1,1 +1,13 @@
 # FullFlow
+
+Have you ever wanted to model fluid systems but didn't know where to start? Are you interested in simple, one-dimensional fluid and thermal models? Look no further!
+
+FullFlow is Python package for building and solving fluid, thermal, propulsion, control, and transient network models. FullFlow gets its name from the infamous Full Flow Staged Combustion rocket engine cycle, which is considered the most difficult engine cycle to design. This became a fitting name for a tool was inspired by one of NASA's coolest softwares, ROCETS: a FORTRAN-based program that was and is still is used to model fluid flow in rocket engines. Therefore, FullFlow is primarily intended as a package for rocket engine simulations, which are usually very complex and include valves, injectors, combustion chambers, nozzles, turbopumps, pressurization systems, controllers, and so much more. To design safe hardware and understand engine performance, engineers need models that capture the major fluid pathways in the system. As engines are tested, those models also need to adapt and anchor to real test data.
+
+Historically, engineers have used tools like ROCETS and GFSSP and custom in-house software for this type of work. 
+
+* [**ROCETS**](https://ntrs.nasa.gov/citations/19910015027): NASA Rocket Engine Transient Simulation software. Primarily used for rocket engine fluid systems with a FORTRAN backend and typescript configuration format.
+* [**GFSSP**](https://www.nasa.gov/gfssp/): NASA Generalized Fluid System Simulation Program. Usually used for rocket vehicle feed systems and models things like tank blowdown and feedline chilldown. Can be used with a GUI.
+
+These tools are extremely useful, but have a lot of drawbacks. For one, tools like ROCETS are usually restricted by ITAR, which makes it difficult for the general public to access. Moreover, these softwares are also pretty old; many of them have been around since the Space Shuttle era, and while they are reliable, the FORTRAN backends and lack of modern code makes it difficult for anyone to implement simulations. For this reason, companies often opt to make their own, custom fluid tools, especially because it's easier to troubleshoot that way.
+
